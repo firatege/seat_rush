@@ -1,10 +1,12 @@
-use actix_web::web::ServiceConfig;
+use std::thread::scope;
+use actix_web::web::{service, ServiceConfig};
 use actix_web::{get, HttpResponse};
-
-mod v1;
+pub mod v1;
 
 pub fn configure(cfg: &mut ServiceConfig) {
-    cfg.configure(v1::configure).service(health);
+    cfg.configure(v1::configure)
+        .service(health);
+    
 }
 
 #[get("/health")]
